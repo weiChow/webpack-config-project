@@ -1,0 +1,46 @@
+@font-face {
+  font-family: 'CalligraphyStye';
+  src: url("../../static/font/CalligraphyStye.ttf") format('truetype');
+}
+
+@font-face {
+  font-family: 'NEUROPOL';
+  src: url("../../static/font/Neuropol.ttf") format('truetype');
+}
+
+@color: #ff6269;
+
+.search {
+  p {
+    font-family: 'CalligraphyStye';
+  }
+
+  span {
+    color: #70ca57;
+    font-family: 'Neuropol';
+  }
+
+  .logoContainer {
+    padding: 50px;
+
+    img {
+      width: 30%;
+      height: 30%;
+    }
+  }
+
+  .flexBox {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    div {
+      width: 100px;
+      height: 100px;
+      color: #FFFFFF;
+      background-color: #70ca57;
+    }
+  }
+
+  color: @color;
+}
