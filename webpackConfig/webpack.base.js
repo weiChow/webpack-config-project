@@ -63,8 +63,11 @@ module.exports = (mode) => {
     plugins: Plugins(mode).concat(htmlWebpackPlugins),
     // 解析
     resolve: {
+      // 自动解析确定的扩展
+      extensions: ['.wasm', '.mjs', '.js', '.json'],
       alias: {
-        'react-dom': '@hot-loader/react-dom'
+        '@': path.join(__dirname, '..', 'src'), // @映射到src目录
+        'react-dom': '@hot-loader/react-dom'  // 该包支持对React hook热更新
       }
     },
   }
