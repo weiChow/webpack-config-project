@@ -1,23 +1,23 @@
 "use strict";
 
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.less';
+import {AppContainer} from "react-hot-loader";
+import IndexComponent from './component/banner/IndexComponent.js';
 
-// 接收热更新输出，只有accept才能被更新
-if (module.hot) {
-  module.hot.accept();
-}
+const root = document.getElementById("root");
+const render = Component => {
+  ReactDOM.render(
+    <AppContainer>
+      <Component/>
+    </AppContainer>,
+    root
+  );
+};
 
-class Index extends Component {
+render(IndexComponent);
 
-  render() {
-    return (
-      <div className='index'>
-        <p>首页</p>
-      </div>
-    );
-  }
-}
-
-ReactDOM.render(<Index/>, document.getElementById('root'));
+module.hot.accept('./component/banner/IndexComponent.js', () => {
+  const nextIndexComponent = require('./component/banner/IndexComponent.js').default;
+  render(nextIndexComponent);
+});

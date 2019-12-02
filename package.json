@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NODE_ENV=production webpack --config webpack.prod.js",
+    "build": "cross-env NODE_ENV=production webpack --config webpackConfig/webpack.prod.js",
     "watch": "webpack --watch",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpack.dev.js --color",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpackConfig/webpack.dev.js --color",
     "server": "cross-env NODE_ENV=development node server.js"
   },
   "keywords": [],
@@ -47,8 +47,9 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "@hot-loader/react-dom": "^16.11.0+4.12.16",
     "lib-flexible": "^0.3.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react": "^16.12.0",
+    "react-hot-loader": "^4.12.18"
   }
 }
