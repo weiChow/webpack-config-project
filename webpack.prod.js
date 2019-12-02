@@ -1,4 +1,5 @@
 "use strict";
+// product
 
 const glob = require("glob");
 
@@ -53,8 +54,8 @@ module.exports = {
   entry: entry,  //入口(SPA默认值：./src/index.js, 此处配置为MPA)
   output: {
     path: outputPath,
-    filename: "pages/[name]/[name]_[hash:16].js",
-    publicPath: "/"
+    filename: "pages/[name]/[name]_[hash:16].js"
+    // publicPath: "/"
   },  // 输出构建
   //优化
   optimization: {

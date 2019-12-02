@@ -1,8 +1,12 @@
 "use strict";
+// development
 
 const glob = require("glob");
 const path = require("path");
 const webpack = require("webpack");
+
+console.log(process.env.NODE_ENV);
+console.log(process.env.NODE_ENV === "development");
 
 // 简化了HTML文件的创建，以便为你的webpack包提供服务
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -10,6 +14,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const outputPath = path.resolve(__dirname, "dist");
+
+console.log(path.resolve(outputPath, 'pages', 'index'));
 
 // 多页应用
 const setMPA = () => {
@@ -20,7 +26,10 @@ const setMPA = () => {
   Object.keys(entryFiles).map(index => {
     const matchKey = entryFiles[index].match(/src\/pages\/(.*)\/index.js/);
     const pageName = matchKey[1];
-    entry[pageName] = entryFiles[index];
+    entry[pageName] = [
+      "webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000",
+      entryFiles[index]
+    ];
     htmlWebpackPlugins.push(
       new HtmlWebpackPlugin({
         template: path.resolve(__dirname, `./src/pages/${pageName}/index.html`),
@@ -46,8 +55,8 @@ module.exports = {
   entry: entry,  //入口(SPA默认值：./src/index.js, 此处配置为MPA)
   output: {
     path: outputPath,
-    filename: "pages/[name]/[name]_[hash:16].js",
-    publicPath: "/"
+    filename: "pages/[name]/[name]_[hash:16].js"
+    // publicPath: "/"
   },  // 输出构建
   // module 关于模块配置
   module: {
@@ -68,7 +77,13 @@ module.exports = {
         test: /\.less$/,
         //loader 从右到左地取值(evaluate)/执行(execute)
         use: [
-          MiniCssExtractPlugin.loader,
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: process.env.NODE_ENV === "development",
+              reloadAll: true
+            },
+          },
           "css-loader",
           {
             loader: "px2rem-loader",  //放在less-loader之后执行
@@ -121,7 +136,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(), //HMR 热替换模块 开发模式搭配WDS使用
+    new webpack.HotModuleReplacementPlugin(), //HMR 热替换模块 开发模式搭配WDS WDM使用
     new MiniCssExtractPlugin({
       filename: 'pages/[name]/[name].[contenthash:8].css',
     })  //用来抽离css文件 不用打包到js文件里
