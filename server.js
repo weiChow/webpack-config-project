@@ -1,5 +1,6 @@
 const path = require("path");
 const os = require('os');
+const open = require('open');
 const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -51,6 +52,9 @@ app.get('/:pageName?', function (req, res, next) {
 // 将文件 serve 到 port 8000
 app.listen(8000, function () {
   console.log(`app listening on \n http://localhost:8000! \n http://${getIPAddress()}:8000!`);
+  (async () => {
+    await open('http://localhost:8000/index');
+  })();
 });
 
 /**
