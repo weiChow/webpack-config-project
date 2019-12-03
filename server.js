@@ -1,4 +1,5 @@
 const path = require("path");
+const os = require('os');
 const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
@@ -49,5 +50,22 @@ app.get('/:pageName?', function (req, res, next) {
 
 // 将文件 serve 到 port 8000
 app.listen(8000, function () {
-  console.log('Example app listening on port http://localhost:8000!\n');
+  console.log(`app listening on \n http://localhost:8000! \n http://${getIPAddress()}:8000!`);
 });
+
+/**
+ * 获取本机IP
+ * @returns {string}
+ */
+function getIPAddress() {
+  let interfaces = os.networkInterfaces();
+  for (let devName in interfaces) {
+    let iface = interfaces[devName];
+    for (let i = 0; i < iface.length; i++) {
+      let alias = iface[i];
+      if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+        return alias.address;
+      }
+    }
+  }
+}
