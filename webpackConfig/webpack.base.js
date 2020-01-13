@@ -10,15 +10,12 @@ const Plugins = require("./common/plugins");
 // 简化了HTML文件的创建，以便为你的webpack包提供服务
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
-const outputPath = path.resolve(__dirname, "../dist");
-
 module.exports = (mode) => {
   // 多页应用
   const setMPA = () => {
     let entry = {};
     let htmlWebpackPlugins = [];
-
-    const entryFiles = glob.sync(path.join(__dirname, '../src/pages/*/index.js'));
+    const entryFiles = glob.sync(path.join(__dirname, "../src/pages/*/index.js"));
     Object.keys(entryFiles).map(index => {
       const matchKey = entryFiles[index].match(/src\/pages\/(.*)\/index.js/);
       const pageName = matchKey[1];
@@ -34,25 +31,46 @@ module.exports = (mode) => {
           chunks: [pageName],
           inject: true, // 将js放在body底部
           minify: {
-            html5: true
+            removeComments: true, // 移除HTML中的注释
+            collapseWhitespace: true //删除空白符与换行符
           }
         }));
     });
 
     return {
       entry,
+      filename: "pages/[name]/[name]_[hash:16].js",
       htmlWebpackPlugins
     }
   };
 
-  const {entry, htmlWebpackPlugins} = setMPA();
+  // 单页应用
+  const setSPA = () => {
+    return {
+      entry: path.resolve(__dirname, "../index.ts"),
+      filename: "js/[name]_[hash:16].js",
+      htmlWebpackPlugins: [
+        new HtmlWebpackPlugin({
+          template: path.resolve(__dirname, `../index.html`),
+          filename: `index.html`,
+          inject: true, // 将js放在body底部
+          minify: {
+            removeComments: true, // 移除HTML中的注释
+            collapseWhitespace: true //删除空白符与换行符
+          }
+        })
+      ]
+    }
+  };
+
+  const {entry, filename, htmlWebpackPlugins} = process.env.appMode === "SPA" ? setSPA() : setMPA();
 
   return {
     mode: mode, // 配置webpack构建模式(development production)
-    entry: entry,  //入口(SPA默认值：./src/index.js, 此处配置为MPA)
+    entry,  //入口
     output: {
-      path: outputPath,
-      filename: "pages/[name]/[name]_[hash:16].js",
+      path: path.resolve(__dirname, "../dist"),
+      filename,
       publicPath: "/"
     },  // 输出构建
     // module 关于模块配置
@@ -64,10 +82,10 @@ module.exports = (mode) => {
     // 解析
     resolve: {
       // 自动解析确定的扩展
-      extensions: ['.wasm', '.mjs', '.js', '.json'],
+      extensions: [".wasm", ".mjs", ".ts", ".js", ".json"],
       alias: {
-        '@': path.join(__dirname, '..', 'src'), // @映射到src目录
-        'react-dom': '@hot-loader/react-dom'  // 该包支持对React hook热更新
+        "@": path.join(__dirname, "..", "src"), // @映射到src目录
+        "react-dom": "@hot-loader/react-dom"  // 该包支持对React hook热更新
       }
     },
   }

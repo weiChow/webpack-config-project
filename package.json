@@ -7,8 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cross-env NODE_ENV=production webpack --config webpackConfig/webpack.prod.js",
     "watch": "webpack --watch",
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config webpackConfig/webpack.dev.js --color",
-    "server": "cross-env NODE_ENV=development node server.js"
+    "dev": "cross-env NODE_ENV=development cross-env appMode=SPA webpack-dev-server --config webpackConfig/webpack.dev.js --color",
+    "server": "cross-env NODE_ENV=development cross-env appMode=MPA node server.js --color"
   },
   "keywords": [],
   "author": "",
@@ -38,6 +38,8 @@
     "px2rem-loader": "^0.1.9",
     "raw-loader": "^0.5.1",
     "style-loader": "^1.0.0",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.4",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^2.2.0",
     "webpack": "^4.41.2",

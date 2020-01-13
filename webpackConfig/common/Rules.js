@@ -9,6 +9,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = (mode) => (
   [
     {
+      test: /\.tsx?$/,
+      use: "ts-loader",
+      exclude: /node_modules/
+    },
+    {
       test: /\.js$/,  //文件匹配规则
       use: "babel-loader"   //通过babel-loader与.babel文件建立联系
     },

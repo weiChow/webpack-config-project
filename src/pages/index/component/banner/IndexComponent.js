@@ -4,7 +4,6 @@ import React, {Component} from 'react';
 import './IndexComponent.less';
 
 class IndexComponent extends Component {
-
   render() {
     return (
       <div className='index'>
