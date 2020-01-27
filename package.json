@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cross-env NODE_ENV=production webpack --config webpackConfig/webpack.prod.js",
     "watch": "webpack --watch",
     "dev": "cross-env NODE_ENV=development cross-env appMode=SPA webpack-dev-server --config webpackConfig/webpack.dev.js --color",
-    "server": "cross-env NODE_ENV=development cross-env appMode=MPA node server.js --color"
+    "spaBuild": "cross-env NODE_ENV=production appMode=SPA webpack --config webpackConfig/webpack.prod.js",
+    "server": "cross-env NODE_ENV=development cross-env appMode=MPA node server.js --color",
+    "mpaBuild": "cross-env NODE_ENV=production appMode=MPA webpack --config webpackConfig/webpack.prod.js"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +19,7 @@
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "^7.6.3",
     "@babel/preset-react": "^7.6.3",
+    "@types/webpack-env": "^1.15.0",
     "autoprefixer": "^9.7.0",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
@@ -52,6 +54,8 @@
   },
   "dependencies": {
     "@hot-loader/react-dom": "^16.11.0+4.12.16",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
     "lib-flexible": "^0.3.2",
     "react": "^16.12.0",
     "react-hot-loader": "^4.12.18"

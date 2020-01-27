@@ -767,10 +767,30 @@
   resolved "http://r.cnpmjs.org/@types/node/download/@types/node-12.12.14.tgz#1c1d6e3c75dba466e0326948d56e8bd72a1903d2"
   integrity sha1-HB1uPHXbpGbgMmlI1W6L1yoZA9I=
 
+"@types/prop-types@*":
+  version "15.7.3"
+  resolved "http://r.cnpmjs.org/@types/prop-types/download/@types/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
+  integrity sha1-KrDV2i5YFflLC51LldHl8kOrLKc=
+
 "@types/q@^1.5.1":
   version "1.5.2"
   resolved "http://r.cnpmjs.org/@types/q/download/@types/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha1-aQoUdbhPKohP0HzXl8APXzE1bqg=
+
+"@types/react-dom@^16.9.4":
+  version "16.9.4"
+  resolved "http://r.cnpmjs.org/@types/react-dom/download/@types/react-dom-16.9.4.tgz#0b58df09a60961dcb77f62d4f1832427513420df"
+  integrity sha1-C1jfCaYJYdy3f2LU8YMkJ1E0IN8=
+  dependencies:
+    "@types/react" "*"
+
+"@types/react@*", "@types/react@^16.9.17":
+  version "16.9.17"
+  resolved "http://r.cnpmjs.org/@types/react/download/@types/react-16.9.17.tgz#58f0cc0e9ec2425d1441dd7b623421a867aa253e"
+  integrity sha1-WPDMDp7CQl0UQd17YjQhqGeqJT4=
+  dependencies:
+    "@types/prop-types" "*"
+    csstype "^2.2.0"
 
 "@types/source-list-map@*":
   version "0.1.2"
@@ -788,6 +808,11 @@
   integrity sha1-lr6uI99vVhhiqDC0KIpJ6GuqwII=
   dependencies:
     source-map "^0.6.1"
+
+"@types/webpack-env@^1.15.0":
+  version "1.15.0"
+  resolved "http://r.cnpmjs.org/@types/webpack-env/download/@types/webpack-env-1.15.0.tgz#bd9956d5044b1fb43e869a9ba9148862ff98d9fd"
+  integrity sha1-vZlW1QRLH7Q+hpqbqRSIYv+Y2f0=
 
 "@types/webpack-sources@*":
   version "0.1.5"
@@ -2142,6 +2167,11 @@ csso@^4.0.2:
   integrity sha1-5fgas6Vrju+38Aks5yeTKfRU3j0=
   dependencies:
     css-tree "1.0.0-alpha.37"
+
+csstype@^2.2.0:
+  version "2.6.8"
+  resolved "http://r.cnpmjs.org/csstype/download/csstype-2.6.8.tgz#0fb6fc2417ffd2816a418c9336da74d7f07db431"
+  integrity sha1-D7b8JBf/0oFqQYyTNtp01/B9tDE=
 
 cyclist@^1.0.1:
   version "1.0.1"

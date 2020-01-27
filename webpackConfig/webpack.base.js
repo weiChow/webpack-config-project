@@ -47,7 +47,7 @@ module.exports = (mode) => {
   // 单页应用
   const setSPA = () => {
     return {
-      entry: path.resolve(__dirname, "../index.ts"),
+      entry: path.resolve(__dirname, "../index.tsx"),
       filename: "js/[name]_[hash:16].js",
       htmlWebpackPlugins: [
         new HtmlWebpackPlugin({
@@ -82,7 +82,7 @@ module.exports = (mode) => {
     // 解析
     resolve: {
       // 自动解析确定的扩展
-      extensions: [".wasm", ".mjs", ".ts", ".js", ".json"],
+      extensions: [".wasm", ".mjs", ".ts", ".tsx", ".js", ".json"],
       alias: {
         "@": path.join(__dirname, "..", "src"), // @映射到src目录
         "react-dom": "@hot-loader/react-dom"  // 该包支持对React hook热更新
